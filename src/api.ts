@@ -1,7 +1,6 @@
-import { TwitterApi } from 'twitter-api-v2';
-
 // This is the in-memory cache for our trending data.
 let trendingData: any[] = [];
+let lastUpdated: Date | null = null;
 
 // List of crypto "metas" to search for on Twitter.
 const METAS_TO_SEARCH = [
@@ -36,6 +35,7 @@ export const fetchTrendingData = async () => {
         tweet_volume: 'Please add Twitter API Key',
       },
     ];
+    lastUpdated = new Date();
     return;
   }
 
@@ -104,6 +104,7 @@ export const fetchTrendingData = async () => {
         ]
     }
 
+    lastUpdated = new Date();
     console.log('Trending data updated from Twitter API.');
   } catch (error: any) {
     console.error('Failed to fetch trending data from Twitter. Full error:');
@@ -123,9 +124,13 @@ export const fetchTrendingData = async () => {
         tweet_volume: errorMessage,
       },
     ];
+    lastUpdated = new Date();
   }
 };
 
 export const getTrendingData = () => {
-  return trendingData;
+  return {
+    data: trendingData,
+    lastUpdated,
+  };
 };

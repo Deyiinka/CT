@@ -20,7 +20,7 @@ app.get('/api/trending', async (req, res) => {
     // If the data is empty and a fetch is not already in progress,
     // trigger a fetch. This is useful for the first load on a new
     // server instance.
-    if (data.length === 0 && !isFetching) {
+    if (data.data.length === 0 && !isFetching) {
       isFetching = true;
       await fetchTrendingData();
       data = getTrendingData();
