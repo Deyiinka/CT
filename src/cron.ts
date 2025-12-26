@@ -2,10 +2,15 @@ import cron from 'node-cron';
 import { fetchTrendingData } from './api';
 
 export const startCronJob = () => {
+  console.log('Starting cron job...');
   // Schedule a job to run once per hour
-  cron.schedule('0 * * * *', () => {
-    console.log('Running cron job to fetch trending data...');
-    fetchTrendingData();
+  cron.schedule('0 * * * *', async () => {
+    try {
+      console.log('Running cron job to fetch trending data...');
+      await fetchTrendingData();
+    } catch (error) {
+      console.error('Error fetching trending data in cron job:', error);
+    }
   });
 
   // Fetch data on startup.

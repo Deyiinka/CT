@@ -18,6 +18,7 @@ const METAS_TO_SEARCH = [
 ];
 
 export const fetchTrendingData = async () => {
+  console.log('Attempting to fetch trending data...');
   const bearerToken = process.env.TWITTER_BEARER_TOKEN;
 
   if (!bearerToken || bearerToken === 'YOUR_TOKEN_HERE') {
