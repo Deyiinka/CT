@@ -3,8 +3,8 @@ import { fetchTrendingData } from './api';
 
 export const startCronJob = () => {
   console.log('Starting cron job...');
-  // Schedule a job to run once per hour
-  cron.schedule('0 * * * *', async () => {
+  // Schedule a job to run once per day at 7am
+  cron.schedule('0 7 * * *', async () => {
     try {
       console.log('Running cron job to fetch trending data...');
       await fetchTrendingData();
